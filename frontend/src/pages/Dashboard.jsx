@@ -9,6 +9,7 @@ import TaskFilters from '../components/TaskFilters';
 import TaskModal from '../components/TaskModal';
 import ConfirmDialog from '../components/ConfirmDialog';
 import LoadingSpinner from '../components/LoadingSpinner';
+import Button from '../components/ui/Button';
 import { Plus, ClipboardList } from 'lucide-react';
 
 export default function Dashboard() {
@@ -119,13 +120,10 @@ export default function Dashboard() {
             Here&apos;s your task overview
           </p>
         </div>
-        <button
-          onClick={handleAddNew}
-          className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-        >
+        <Button onClick={handleAddNew}>
           <Plus className="h-4 w-4" />
           Add Task
-        </button>
+        </Button>
       </div>
 
       {!stats ? (
@@ -171,13 +169,10 @@ export default function Dashboard() {
               <p className="mt-1 text-sm text-muted-foreground text-center max-w-sm">
                 Stay organized and manage your tasks with ease. Create your first task to get started.
               </p>
-              <button
-                onClick={handleAddNew}
-                className="mt-6 inline-flex items-center gap-2 rounded-md bg-primary px-5 py-2.5 text-sm font-medium text-primary-foreground shadow-sm transition-colors hover:bg-primary/90"
-              >
+              <Button onClick={handleAddNew} className="mt-6">
                 <Plus className="h-4 w-4" />
                 Create Your First Task
-              </button>
+              </Button>
             </>
           )}
         </div>

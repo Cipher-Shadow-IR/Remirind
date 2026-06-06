@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { PRIORITIES } from '../utils/constants';
-import { Plus, X, Loader2 } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
+import Button from './ui/Button';
 
 const initialState = {
   title: '',
@@ -157,26 +158,12 @@ export default function TaskModal({ task, onSubmit, onCancel }) {
             </div>
           </div>
           <div className="flex items-center gap-3 pt-2">
-            <button
-              type="submit"
-              disabled={submitting}
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
-              {submitting ? (
-                <Loader2 className="h-4 w-4 animate-spin" />
-              ) : (
-                <Plus className="h-4 w-4" />
-              )}
+            <Button type="submit" loading={submitting} className="flex-1">
               {submitting ? 'Saving...' : task ? 'Update' : 'Add Task'}
-            </button>
-            <button
-              type="button"
-              onClick={onCancel}
-              disabled={submitting}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-            >
+            </Button>
+            <Button type="button" variant="outline" onClick={onCancel} disabled={submitting}>
               Cancel
-            </button>
+            </Button>
           </div>
         </form>
       </div>

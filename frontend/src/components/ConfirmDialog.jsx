@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
-import { AlertTriangle, X, Loader2 } from 'lucide-react';
+import { AlertTriangle, X } from 'lucide-react';
+import Button from './ui/Button';
 
 export default function ConfirmDialog({ open, title, message, onConfirm, onCancel, loading }) {
   useEffect(() => {
@@ -38,25 +39,12 @@ export default function ConfirmDialog({ open, title, message, onConfirm, onCance
           </div>
         </div>
         <div className="flex items-center justify-end gap-3 mt-6">
-          <button
-            onClick={onCancel}
-            disabled={loading}
-            className="inline-flex items-center justify-center rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-          >
+          <Button variant="outline" onClick={onCancel} disabled={loading}>
             Cancel
-          </button>
-          <button
-            onClick={onConfirm}
-            disabled={loading}
-            className="inline-flex items-center justify-center gap-2 rounded-md bg-destructive px-4 py-2 text-sm font-medium text-destructive-foreground transition-colors hover:bg-destructive/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
-          >
-            {loading ? (
-              <Loader2 className="h-4 w-4 animate-spin" />
-            ) : (
-              <AlertTriangle className="h-4 w-4" />
-            )}
+          </Button>
+          <Button variant="destructive" onClick={onConfirm} loading={loading}>
             {loading ? 'Deleting...' : 'Delete'}
-          </button>
+          </Button>
         </div>
       </div>
     </div>

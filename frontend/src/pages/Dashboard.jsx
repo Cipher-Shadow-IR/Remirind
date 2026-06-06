@@ -33,6 +33,7 @@ export default function Dashboard() {
   const [editingTask, setEditingTask] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [deleteTarget, setDeleteTarget] = useState(null);
+  const [deleting, setDeleting] = useState(false);
 
   useEffect(() => {
     const params = {};
@@ -92,6 +93,7 @@ export default function Dashboard() {
 
   const handleConfirmDelete = async () => {
     if (!deleteTarget) return;
+    setDeleting(true);
     try {
       await deleteTask(deleteTarget);
       addToast('Task deleted successfully', 'success');
@@ -102,6 +104,7 @@ export default function Dashboard() {
       );
     } finally {
       setDeleteTarget(null);
+      setDeleting(false);
     }
   };
 
@@ -207,6 +210,7 @@ export default function Dashboard() {
         message="Are you sure you want to delete this task? This action cannot be undone."
         onConfirm={handleConfirmDelete}
         onCancel={() => setDeleteTarget(null)}
+        loading={deleting}
       />
     </Layout>
   );

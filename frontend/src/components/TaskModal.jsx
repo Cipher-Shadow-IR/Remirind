@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { PRIORITIES } from '../utils/constants';
-import { Plus, X } from 'lucide-react';
+import { Plus, X, Loader2 } from 'lucide-react';
 
 const initialState = {
   title: '',
@@ -18,6 +18,7 @@ function getTomorrow() {
 export default function TaskModal({ task, onSubmit, onCancel }) {
   const [form, setForm] = useState(initialState);
   const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
   const minDate = getTomorrow();
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function TaskModal({ task, onSubmit, onCancel }) {
       return;
     }
     setError('');
+    setSubmitting(true);
     try {
       await onSubmit({
         title: form.title.trim(),
@@ -65,6 +67,8 @@ export default function TaskModal({ task, onSubmit, onCancel }) {
       });
     } catch (err) {
       setError(err.response?.data?.message || 'Something went wrong');
+    } finally {
+      setSubmitting(false);
     }
   };
 
@@ -155,15 +159,21 @@ export default function TaskModal({ task, onSubmit, onCancel }) {
           <div className="flex items-center gap-3 pt-2">
             <button
               type="submit"
+              disabled={submitting}
               className="inline-flex flex-1 items-center justify-center gap-2 rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground transition-colors hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
             >
-              <Plus className="h-4 w-4" />
-              {task ? 'Update' : 'Add Task'}
+              {submitting ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                <Plus className="h-4 w-4" />
+              )}
+              {submitting ? 'Saving...' : task ? 'Update' : 'Add Task'}
             </button>
             <button
               type="button"
               onClick={onCancel}
-              className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              disabled={submitting}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-input bg-background px-4 py-2 text-sm font-medium transition-colors hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50"
             >
               Cancel
             </button>

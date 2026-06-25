@@ -13,6 +13,16 @@ if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
 
+app.get("/api", (req, res) => {
+  res.status(200).json({
+    success: true,
+    name: "Remirind API",
+    version: "1.0.0",
+    status: "Running",
+    documentation: "/api/health"
+  });
+});
+
 app.get('/api/health', (req, res) => {
   res.json({ success: true, message: 'Server is running' });
 });

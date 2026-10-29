@@ -10,29 +10,31 @@ export default function TaskFilters({ filters, onChange }) {
     onChange({ status: '', priority: '', search: '' });
   };
 
-  const hasFilters = filters.status || filters.priority || filters.search;
+  const hasFilters = Boolean(filters.status || filters.priority || filters.search);
 
   const inputClass =
-    'flex h-9 rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2';
+    'flex h-9 rounded-[3px] border border-[#d4ccbd] bg-[#f7f4ec] px-3 py-1.5 text-xs text-[#29271f] font-sans focus:outline-none focus:border-[#8b713a] focus:ring-1 focus:ring-[#8b713a] transition-colors';
 
   return (
-    <div className="mb-8 flex flex-wrap items-end gap-3 rounded-xl border bg-card p-4 shadow-sm">
-      <div className="flex items-center gap-2">
-        <SlidersHorizontal className="h-4 w-4 text-muted-foreground" />
-        <span className="text-sm font-medium">Filters</span>
+    <div className="mb-8 flex flex-wrap items-center gap-3 rounded-[3px] border border-[#d4ccbd] bg-[#fcfaf5] p-3 sm:p-4 shadow-[0_1px_2px_rgba(41,39,31,0.03)]">
+      <div className="flex items-center gap-2 text-[11px] font-medium uppercase tracking-widest text-[#514d44] mr-2">
+        <SlidersHorizontal className="h-3.5 w-3.5 text-[#8b713a]" />
+        <span>Filter</span>
       </div>
+
       <div className="flex-1 min-w-[200px]">
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+          <Search className="absolute left-3 top-1/2 h-3.5 w-3.5 -translate-y-1/2 text-[#514d44]/70" />
           <input
             type="text"
             placeholder="Search tasks..."
             value={filters.search}
             onChange={(e) => handleChange('search', e.target.value)}
-            className={`${inputClass} w-full pl-9`}
+            className={`${inputClass} w-full pl-8`}
           />
         </div>
       </div>
+
       <select
         value={filters.status}
         onChange={(e) => handleChange('status', e.target.value)}
@@ -45,6 +47,7 @@ export default function TaskFilters({ filters, onChange }) {
           </option>
         ))}
       </select>
+
       <select
         value={filters.priority}
         onChange={(e) => handleChange('priority', e.target.value)}
@@ -57,15 +60,16 @@ export default function TaskFilters({ filters, onChange }) {
           </option>
         ))}
       </select>
-      {hasFilters && (
+
+      {hasFilters ? (
         <button
           onClick={handleClear}
-          className="inline-flex items-center justify-center gap-1 rounded-md px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-accent-foreground"
+          className="inline-flex items-center gap-1 rounded-[3px] border border-[#d4ccbd] px-2.5 py-1.5 text-[11px] font-medium uppercase tracking-wider text-[#514d44] transition-colors hover:border-[#8b713a] hover:bg-[#eae3d5] hover:text-[#29271f]"
         >
-          <X className="h-4 w-4" />
-          Clear
+          <X className="h-3 w-3" />
+          <span>Reset</span>
         </button>
-      )}
+      ) : null}
     </div>
   );
 }

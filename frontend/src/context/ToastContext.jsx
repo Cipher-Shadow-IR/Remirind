@@ -1,20 +1,26 @@
 import { createContext, useState, useCallback, useRef, useContext } from 'react';
-import { CheckCircle2, AlertCircle, X } from 'lucide-react';
+import { CheckCircle2, AlertCircle, Info, X } from 'lucide-react';
 
 const ToastContext = createContext(null);
 
 const typeStyles = {
   success: {
-    border: 'border-green-200',
-    bg: 'bg-green-50',
+    border: 'border-[#8b713a]/50',
+    bg: 'bg-[#fcfaf5]',
     icon: CheckCircle2,
-    iconColor: 'text-green-600',
+    iconColor: 'text-[#68501f]',
   },
   error: {
-    border: 'border-red-200',
-    bg: 'bg-red-50',
+    border: 'border-[#8b2b2b]/50',
+    bg: 'bg-[#fcfaf5]',
     icon: AlertCircle,
-    iconColor: 'text-red-600',
+    iconColor: 'text-[#8b2b2b]',
+  },
+  info: {
+    border: 'border-[#d4ccbd]',
+    bg: 'bg-[#fcfaf5]',
+    icon: Info,
+    iconColor: 'text-[#8b713a]',
   },
 };
 
@@ -38,24 +44,25 @@ export function ToastProvider({ children }) {
   return (
     <ToastContext.Provider value={{ addToast, removeToast }}>
       {children}
-      <div className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm">
+      <div className="fixed bottom-4 right-4 z-[100] flex flex-col gap-2 max-w-sm" role="region" aria-live="polite">
         {toasts.map((toast) => {
           const style = typeStyles[toast.type] || typeStyles.success;
           const Icon = style.icon;
           return (
             <div
               key={toast.id}
-              className={`flex items-start gap-3 rounded-lg border ${style.border} ${style.bg} p-4 shadow-lg animate-fade-in`}
+              className={`flex items-start gap-3 rounded-[3px] border ${style.border} ${style.bg} p-3.5 shadow-[0_4px_16px_rgba(41,39,31,0.08)] animate-fade-in font-sans`}
             >
-              <Icon className={`h-5 w-5 shrink-0 mt-0.5 ${style.iconColor}`} />
-              <p className="text-sm font-medium text-foreground flex-1">
+              <Icon className={`h-4 w-4 shrink-0 mt-0.5 ${style.iconColor}`} />
+              <p className="text-xs font-normal text-[#29271f] flex-1 leading-relaxed">
                 {toast.message}
               </p>
               <button
                 onClick={() => removeToast(toast.id)}
-                className="shrink-0 rounded-md p-1 text-muted-foreground/60 transition-colors hover:text-foreground"
+                className="shrink-0 rounded-[2px] p-0.5 text-[#514d44]/70 transition-colors hover:text-[#29271f]"
+                aria-label="Dismiss notification"
               >
-                <X className="h-4 w-4" />
+                <X className="h-3.5 w-3.5" />
               </button>
             </div>
           );

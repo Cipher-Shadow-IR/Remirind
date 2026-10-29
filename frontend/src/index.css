@@ -4,24 +4,44 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 221.2 83.2% 53.3%;
-    --radius: 0.5rem;
+    --dp-color-ground: #f7f4ec;
+    --dp-color-surface: #fcfaf5;
+    --dp-color-ink: #29271f;
+    --dp-color-ink-muted: #514d44;
+    --dp-color-accent: #8b713a;
+    --dp-color-accent-ink: #68501f;
+    --dp-color-line: #d4ccbd;
+    --dp-color-band-edge: #e7e0d3;
+    --dp-color-action-hover: #454034;
+    --dp-typography-display: "EB Garamond", "Professional Garamond", Georgia, serif;
+    --dp-typography-reading: "Instrument Sans", "Professional Instrument", Arial, sans-serif;
+    --dp-typography-supporting: 15px;
+    --dp-typography-metadata: 12px;
+    --dp-typography-body-leading: 1.65;
+    --dp-spacing-control-gap: 24px;
+    --dp-radius-corner: 3px;
+    --dp-border-hairline: 1px;
+    --dp-motion-interaction: 160ms linear;
+
+    /* Theme colors */
+    --background: 44 33% 95%;
+    --foreground: 44 14% 14%;
+    --card: 45 40% 98%;
+    --card-foreground: 44 14% 14%;
+    --primary: 44 14% 14%;
+    --primary-foreground: 44 33% 95%;
+    --secondary: 40 25% 91%;
+    --secondary-foreground: 44 14% 14%;
+    --muted: 42 22% 91%;
+    --muted-foreground: 40 9% 30%;
+    --accent: 40 41% 38%;
+    --accent-foreground: 44 33% 95%;
+    --destructive: 0 65% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 39 19% 79%;
+    --input: 39 19% 79%;
+    --ring: 40 41% 38%;
+    --radius: 3px;
   }
 }
 
@@ -29,8 +49,40 @@
   * {
     @apply border-border;
   }
+
   body {
-    @apply bg-background text-foreground;
-    font-feature-settings: "rlig" 1, "calt" 1;
+    background-color: var(--dp-color-ground);
+    color: var(--dp-color-ink);
+    font-family: var(--dp-typography-reading);
+    line-height: var(--dp-typography-body-leading);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--dp-typography-display);
+    color: var(--dp-color-ink);
+    letter-spacing: -0.015em;
+    font-weight: 400;
+  }
+
+  /* Fine gold and hairline decorative elements */
+  hr {
+    border-color: var(--dp-color-line);
+    border-top-width: 1px;
+  }
+
+  /* Smooth linear micro-interaction transitions */
+  button, a, input, select, textarea {
+    transition: background-color 160ms linear, border-color 160ms linear, color 160ms linear, opacity 160ms linear;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }

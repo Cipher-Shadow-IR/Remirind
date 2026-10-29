@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const errorHandler = require('./middleware/errorHandler');
 const authRoutes = require('./routes/authRoutes');
 const taskRoutes = require('./routes/taskRoutes');
+const examRoutes = require('./routes/examRoutes');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.get('/api/health', (req, res) => {
 
 app.use('/api/auth', authRoutes);
 app.use('/api/tasks', taskRoutes);
+app.use('/api/exams', examRoutes);
 
 app.all('*', (req, res) => {
   res.status(404).json({ success: false, message: 'Route not found' });

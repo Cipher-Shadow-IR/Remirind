@@ -1,0 +1,499 @@
+[
+  {
+    "title": "MERN Stack Assessment",
+    "description": "Comprehensive test on MongoDB, Express.js, React, Node.js, RESTful architecture, and state management.",
+    "category": "MERN Stack",
+    "durationMinutes": 20,
+    "passingPercentage": 60,
+    "isActive": true,
+    "questions": [
+      {
+        "questionText": "Which MongoDB aggregation pipeline stage is used to filter documents in a collection?",
+        "options": ["$group", "$project", "$match", "$filter"],
+        "correctOption": 2,
+        "explanation": "$match filters the documents to pass only the documents that match the specified condition(s) to the next pipeline stage.",
+        "marks": 10
+      },
+      {
+        "questionText": "In Express.js, what does the next() function do inside custom middleware?",
+        "options": [
+          "Terminates the current HTTP request",
+          "Passes control to the next middleware or route handler in the stack",
+          "Restarts the Express application",
+          "Redirects the client to another URL"
+        ],
+        "correctOption": 1,
+        "explanation": "Calling next() hands off execution to the subsequent middleware function in the chain.",
+        "marks": 10
+      },
+      {
+        "questionText": "In React, what is the purpose of the cleanup function returned inside useEffect?",
+        "options": [
+          "To clear browser LocalStorage",
+          "To reset component state to initial values",
+          "To clean up subscriptions, timers, or event listeners before the component unmounts or before re-running the effect",
+          "To trigger an immediate re-render"
+        ],
+        "correctOption": 2,
+        "explanation": "The return function in useEffect cleans up side-effects like subscriptions, timers, or abort controllers before re-executing or unmounting.",
+        "marks": 10
+      },
+      {
+        "questionText": "Which Node.js core module is primarily responsible for handling file system operations?",
+        "options": ["path", "fs", "http", "events"],
+        "correctOption": 1,
+        "explanation": "The 'fs' module provides an API for interacting with the file system (both synchronous and asynchronous/promises).",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the primary difference between SQL databases and MongoDB?",
+        "options": [
+          "SQL is NoSQL and MongoDB is relational",
+          "SQL uses tables with rigid schemas; MongoDB is document-oriented with flexible JSON-like BSON schemas",
+          "MongoDB does not support indexes",
+          "SQL databases cannot store numbers"
+        ],
+        "correctOption": 1,
+        "explanation": "MongoDB stores records as dynamic BSON documents without rigid schema constraints, unlike relational tabular SQL databases.",
+        "marks": 10
+      },
+      {
+        "questionText": "In React, why must hooks never be called inside conditional statements or loops?",
+        "options": [
+          "They will throw a syntax error during compilation",
+          "React relies on the call order of hooks remaining identical between renders to preserve state",
+          "Conditional statements cause memory leaks in JavaScript",
+          "Hooks can only be called in plain JavaScript files"
+        ],
+        "correctOption": 1,
+        "explanation": "React maintains hook state by tracking the exact index/order in which hooks are invoked on each render.",
+        "marks": 10
+      },
+      {
+        "questionText": "What HTTP status code should be returned when a resource is successfully created via a POST request?",
+        "options": ["200 OK", "201 Created", "204 No Content", "302 Found"],
+        "correctOption": 1,
+        "explanation": "HTTP 201 Created indicates that the request has succeeded and led to the creation of a new resource.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the role of Mongoose pre-save middleware in a MERN application?",
+        "options": [
+          "To validate incoming HTTP request cookies",
+          "To execute custom logic (such as hashing passwords) before document persistence",
+          "To send automated emails to clients",
+          "To bundle frontend React assets"
+        ],
+        "correctOption": 1,
+        "explanation": "pre('save') hooks allow developers to intercept the document lifecycle immediately before writing to MongoDB.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the Virtual DOM in React and why is it beneficial?",
+        "options": [
+          "A direct copy of the browser DOM stored in Web Workers",
+          "An in-memory lightweight representation of the actual DOM used to compute efficient batched updates via reconciliation",
+          "A plugin that connects React with MongoDB",
+          "A browser extension for debugging React components"
+        ],
+        "correctOption": 1,
+        "explanation": "React diffs the in-memory Virtual DOM against previous snapshots to calculate minimal real DOM updates.",
+        "marks": 10
+      },
+      {
+        "questionText": "What does CORS stand for in web development and why is it enforced?",
+        "options": [
+          "Cross-Origin Resource Sharing; enforced by browsers to prevent unauthorized cross-origin requests",
+          "Central Operating Routing System; enforced by Node.js to manage ports",
+          "Client Online Registration Standard; enforced by MongoDB for access control",
+          "Cascading Object Reference Sheets; used for CSS styling"
+        ],
+        "correctOption": 0,
+        "explanation": "CORS is a browser security mechanism that restricts web applications from requesting resources on different origins without explicit server permission.",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "title": "Web Dev Fundamentals",
+    "description": "Essential web development concepts including HTML5 semantic tags, CSS Box Model, Flexbox/Grid, and HTTP.",
+    "category": "Frontend & Web",
+    "durationMinutes": 15,
+    "passingPercentage": 50,
+    "isActive": true,
+    "questions": [
+      {
+        "questionText": "Which HTML5 semantic element is most suitable for standalone, syndicated content such as a blog post or news story?",
+        "options": ["<div>", "<section>", "<article>", "<aside>"],
+        "correctOption": 2,
+        "explanation": "<article> represents a self-contained composition that is independently distributable or reusable.",
+        "marks": 10
+      },
+      {
+        "questionText": "In CSS layout, which property changes the box sizing so that padding and border are included in an element's total width and height?",
+        "options": ["box-sizing: content-box", "box-sizing: border-box", "display: flex", "margin: auto"],
+        "correctOption": 1,
+        "explanation": "border-box includes padding and borders in the element's total declared width and height.",
+        "marks": 10
+      },
+      {
+        "questionText": "Which HTTP header is utilized by the client to send a Bearer authentication token?",
+        "options": ["Content-Type", "Authorization", "Accept", "X-Auth-Token"],
+        "correctOption": 1,
+        "explanation": "The standard 'Authorization: Bearer <token>' header conveys credentials to authenticate requests.",
+        "marks": 10
+      },
+      {
+        "questionText": "In CSS Flexbox, which property controls alignment along the cross-axis?",
+        "options": ["justify-content", "align-items", "flex-direction", "flex-wrap"],
+        "correctOption": 1,
+        "explanation": "align-items aligns items along the cross-axis, whereas justify-content aligns along the main axis.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the primary difference between localStorage and sessionStorage?",
+        "options": [
+          "localStorage only stores numbers, sessionStorage stores strings",
+          "localStorage persists until explicitly cleared, while sessionStorage expires when the page session / browser tab closes",
+          "sessionStorage has an unlimited storage quota",
+          "localStorage is sent with every HTTP request automatically"
+        ],
+        "correctOption": 1,
+        "explanation": "localStorage data has no expiration date; sessionStorage is scoped to the current browser tab session.",
+        "marks": 10
+      },
+      {
+        "questionText": "Which HTTP method is considered idempotent?",
+        "options": ["POST", "PUT", "PATCH (without precondition)", "CONNECT"],
+        "correctOption": 1,
+        "explanation": "PUT is idempotent: making multiple identical requests has the same effect as making a single request.",
+        "marks": 10
+      },
+      {
+        "questionText": "What does CSS specificity decide when multiple CSS rules match the same element?",
+        "options": [
+          "The file size of the CSS stylesheet",
+          "Which style declaration takes precedence based on selector weight (inline > IDs > classes > elements)",
+          "The loading order of images",
+          "How fast JavaScript executes"
+        ],
+        "correctOption": 1,
+        "explanation": "Specificity is the weight algorithm browsers use to resolve conflicting CSS declarations.",
+        "marks": 10
+      },
+      {
+        "questionText": "Which meta tag is crucial for responsive mobile rendering?",
+        "options": [
+          "<meta charset='UTF-8'>",
+          "<meta name='viewport' content='width=device-width, initial-scale=1.0'>",
+          "<meta http-equiv='X-UA-Compatible' content='IE=edge'>",
+          "<meta name='robots' content='index, follow'>"
+        ],
+        "correctOption": 1,
+        "explanation": "The viewport meta tag instructs the browser how to control the page's dimensions and scaling on mobile screens.",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "title": "JavaScript Core & Async Mastery",
+    "description": "Deep-dive into closures, prototypes, event loops, promises, async/await, and modern ECMAScript features.",
+    "category": "JavaScript",
+    "durationMinutes": 20,
+    "passingPercentage": 70,
+    "isActive": true,
+    "questions": [
+      {
+        "questionText": "What is a closure in JavaScript?",
+        "options": [
+          "A method that terminates an open database connection",
+          "A function bundled with references to its surrounding lexical environment",
+          "An IIFE that clears the call stack",
+          "A tool for minifying code"
+        ],
+        "correctOption": 1,
+        "explanation": "A closure gives an inner function access to its outer scope even after the outer function has finished executing.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the output of typeof null in JavaScript?",
+        "options": ["'null'", "'undefined'", "'object'", "'boolean'"],
+        "correctOption": 2,
+        "explanation": "typeof null returns 'object' due to a historical legacy bug in the initial JavaScript implementation.",
+        "marks": 10
+      },
+      {
+        "questionText": "Which queue has higher priority in the JavaScript Event Loop?",
+        "options": [
+          "Macrotask queue (e.g. setTimeout, setInterval)",
+          "Microtask queue (e.g. Promise callbacks, queueMicrotask)",
+          "I/O polling queue",
+          "They have equal round-robin priority"
+        ],
+        "correctOption": 1,
+        "explanation": "The microtask queue is processed completely after the current execution context and before the next macrotask.",
+        "marks": 10
+      },
+      {
+        "questionText": "What does Promise.all() do when one of the passed promises rejects?",
+        "options": [
+          "It ignores the rejected promise and returns the resolved ones",
+          "It immediately rejects with the reason of the first rejected promise (fail-fast)",
+          "It waits for all promises and returns null",
+          "It throws an uncatchable syntax error"
+        ],
+        "correctOption": 1,
+        "explanation": "Promise.all() rejects immediately upon any rejection. For waiting on all results regardless of outcome, Promise.allSettled() is used.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the difference between == and === in JavaScript?",
+        "options": [
+          "== compares value with type coercion; === performs strict equality without coercion",
+          "=== only compares numbers",
+          "== is faster than ===",
+          "There is no difference"
+        ],
+        "correctOption": 0,
+        "explanation": "Strict equality (===) checks both value and type, whereas loose equality (==) coerces types before comparison.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is variable hoisting in JavaScript?",
+        "options": [
+          "Uploading variables to a cloud server",
+          "The process where variable and function declarations are moved to the top of their containing scope during compilation",
+          "Deleting unused variables to free RAM",
+          "Converting local variables into global variables"
+        ],
+        "correctOption": 1,
+        "explanation": "Declarations are evaluated before any code is executed; var is initialized with undefined, while let/const remain in Temporal Dead Zone (TDZ).",
+        "marks": 10
+      },
+      {
+        "questionText": "Which method creates a new array populated with the results of calling a provided function on every element in the calling array?",
+        "options": ["filter()", "forEach()", "map()", "reduce()"],
+        "correctOption": 2,
+        "explanation": "Array.prototype.map() returns a brand new array with transformed elements without mutating the original array.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the effect of using 'use strict' in a JavaScript file?",
+        "options": [
+          "Prevents execution on older browsers",
+          "Catches silent errors, disallows global variable creation without declaration, and prohibits obsolete features",
+          "Enforces TypeScript static types at runtime",
+          "Compresses the JavaScript code automatically"
+        ],
+        "correctOption": 1,
+        "explanation": "Strict mode enforces stricter parsing and error handling, turning silent bugs into throwing exceptions.",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "title": "Node.js & Express API Security",
+    "description": "Essential backend security practices including JWT, bcrypt, rate limiting, sanitization, and CORS.",
+    "category": "Backend & Security",
+    "durationMinutes": 15,
+    "passingPercentage": 65,
+    "isActive": true,
+    "questions": [
+      {
+        "questionText": "Why should passwords never be hashed with plain MD5 or SHA-256 for user authentication?",
+        "options": [
+          "They take too much RAM to compute",
+          "They are fast non-salted cryptographic algorithms vulnerable to rainbow tables and high-speed GPU brute force",
+          "They cannot hash strings longer than 10 characters",
+          "Node.js does not support them"
+        ],
+        "correctOption": 1,
+        "explanation": "Modern password hashing requires slow, adaptive algorithms like bcrypt or Argon2 with built-in salts to resist brute force.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the primary vulnerability prevented by helmet middleware in Express?",
+        "options": [
+          "Database connection drops",
+          "Common web vulnerabilities (XSS, clickjacking, MIME-sniffing) by configuring secure HTTP response headers",
+          "Syntax errors in JavaScript",
+          "Slow network connections"
+        ],
+        "correctOption": 1,
+        "explanation": "Helmet sets HTTP headers such as Content-Security-Policy, X-Frame-Options, and Strict-Transport-Security.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is a SQL / NoSQL Injection attack and how is it prevented in Mongoose?",
+        "options": [
+          "Injecting CSS styles into database tables",
+          "Malicious queries passed via client input; prevented in Mongoose via schema validation and sanitized parameterized queries",
+          "Crashing the server by uploading large files",
+          "Stealing tokens from localStorage"
+        ],
+        "correctOption": 1,
+        "explanation": "Injection occurs when untrusted input is executed as database query logic. Input validation and parameterized query models prevent it.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the difference between Authentication and Authorization?",
+        "options": [
+          "Authentication verifies WHO you are; Authorization determines WHAT you are allowed to do",
+          "Authentication is on the frontend; Authorization is on the backend",
+          "Authentication uses passwords; Authorization only uses facial recognition",
+          "They are synonymous terms"
+        ],
+        "correctOption": 0,
+        "explanation": "Authentication checks identity (e.g. login). Authorization checks permissions (e.g. Admin role access).",
+        "marks": 10
+      },
+      {
+        "questionText": "Where should sensitive configuration keys (like JWT_SECRET and Database Passwords) be stored in production?",
+        "options": [
+          "Hardcoded directly into GitHub repository files",
+          "In secured environment variables / secrets managers, excluded from source control via .gitignore",
+          "In the browser's localStorage",
+          "In public HTML meta tags"
+        ],
+        "correctOption": 1,
+        "explanation": "Secrets must never be checked into version control and must be injected via environment variables at runtime.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the purpose of API Rate Limiting (e.g., express-rate-limit)?",
+        "options": [
+          "To speed up the internet connection for all users",
+          "To protect endpoints against brute force, credential stuffing, and Denial of Service (DoS) attacks",
+          "To limit how many database tables can be created",
+          "To limit the length of URLs"
+        ],
+        "correctOption": 1,
+        "explanation": "Rate limiting caps the number of requests an IP can make within a specified time window.",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "title": "React Performance & Architecture",
+    "description": "Master React optimization techniques: useMemo, useCallback, code splitting, memoization, and custom hooks.",
+    "category": "React & Architecture",
+    "durationMinutes": 15,
+    "passingPercentage": 60,
+    "isActive": true,
+    "questions": [
+      {
+        "questionText": "When should React.memo be used on a component?",
+        "options": [
+          "On every single component in an application by default",
+          "When a component re-renders frequently with the exact same props and involves expensive rendering logic",
+          "Only on components that do not have state",
+          "Only in Next.js applications"
+        ],
+        "correctOption": 1,
+        "explanation": "React.memo skips re-rendering when props haven't changed, preventing wasteful render cycles on costly components.",
+        "marks": 10
+      },
+      {
+        "questionText": "What does useCallback do in React?",
+        "options": [
+          "Caches the return value of a calculated function",
+          "Returns a memoized version of the callback function that only changes if dependencies change",
+          "Calls an external API asynchronously",
+          "Forces a component to re-mount"
+        ],
+        "correctOption": 1,
+        "explanation": "useCallback preserves function reference equality across renders, preventing unwanted child re-renders.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is React code splitting and how is it commonly achieved?",
+        "options": [
+          "Splitting JavaScript into multiple files using React.lazy() and dynamic import() to reduce initial bundle size",
+          "Dividing one React component into multiple functions in the same file",
+          "Separating HTML from CSS styles",
+          "Splitting a database into multiple collections"
+        ],
+        "correctOption": 0,
+        "explanation": "React.lazy() paired with Suspense enables lazy loading of route bundles on demand.",
+        "marks": 10
+      },
+      {
+        "questionText": "Why should array indices generally be avoided as keys in dynamic React lists?",
+        "options": [
+          "React will throw an error and refuse to render",
+          "Reordering, inserting, or deleting items can cause incorrect component state and inefficient DOM updates",
+          "Keys must always be integers",
+          "Array indices take up too much memory"
+        ],
+        "correctOption": 1,
+        "explanation": "Using indices confuses React's reconciliation diffing when list items are sorted, deleted, or inserted.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the primary advantage of custom React hooks?",
+        "options": [
+          "They make the application run in Node.js instead of the browser",
+          "They extract and share stateful logic across multiple components without altering component hierarchy",
+          "They eliminate the need to use CSS",
+          "They automatically connect React to MongoDB"
+        ],
+        "correctOption": 1,
+        "explanation": "Custom hooks allow modular reuse of stateful logic (like data fetching, authentication, or media queries).",
+        "marks": 10
+      }
+    ]
+  },
+  {
+    "title": "Git & Collaborative Engineering",
+    "description": "Essential version control skills: branching strategies, merge conflicts, pull requests, and CI/CD basics.",
+    "category": "DevOps & Tools",
+    "durationMinutes": 10,
+    "passingPercentage": 50,
+    "isActive": true,
+    "questions": [
+      {
+        "questionText": "What is the purpose of a .gitignore file?",
+        "options": [
+          "To delete ignored files permanently from the hard drive",
+          "To instruct Git which untracked files and folders (e.g., node_modules, .env) should not be committed to version control",
+          "To ignore errors during code execution",
+          "To speed up internet upload speeds"
+        ],
+        "correctOption": 1,
+        "explanation": ".gitignore specifies deliberately untracked files that Git should ignore when staging commits.",
+        "marks": 10
+      },
+      {
+        "questionText": "What command creates and switches to a new branch in Git?",
+        "options": ["git branch <name>", "git checkout -b <name>", "git merge <name>", "git pull -b <name>"],
+        "correctOption": 1,
+        "explanation": "git checkout -b <name> (or git switch -c <name>) creates a new branch and checks it out immediately.",
+        "marks": 10
+      },
+      {
+        "questionText": "What happens during a Git merge conflict?",
+        "options": [
+          "The repository is corrupted and must be re-cloned",
+          "Two branches have contradictory changes to the same line in a file, requiring manual resolution",
+          "Git deletes both versions of the conflicting file",
+          "The server rejects all future commits"
+        ],
+        "correctOption": 1,
+        "explanation": "A merge conflict occurs when automated merging cannot reconcile conflicting edits on the same lines.",
+        "marks": 10
+      },
+      {
+        "questionText": "What is the primary benefit of Continuous Integration (CI)?",
+        "options": [
+          "Writing code without needing developers",
+          "Automatically building, linting, and testing code changes on every commit or pull request to detect bugs early",
+          "Encrypting user passwords in the database",
+          "Hosting websites for free"
+        ],
+        "correctOption": 1,
+        "explanation": "CI pipelines automate verification (linting, tests, builds) to maintain code quality before merging to main.",
+        "marks": 10
+      }
+    ]
+  }
+]

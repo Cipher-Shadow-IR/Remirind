@@ -5,6 +5,16 @@ const seedDefaultExams = require('./seeds/examSeed');
 
 const PORT = process.env.PORT || 5000;
 
+// Listen to unhandled exceptions and rejections
+process.on('unhandledRejection', (reason, promise) => {
+  console.error('Unhandled Rejection at:', promise, 'reason:', reason);
+});
+
+process.on('uncaughtException', (err) => {
+  console.error('Uncaught Exception thrown:', err);
+  process.exit(1);
+});
+
 const start = async () => {
   try {
     await connectDB();
@@ -13,9 +23,10 @@ const start = async () => {
       console.log(`Server running on port ${PORT}`);
     });
   } catch (error) {
-    console.error('Failed to start server:', error.message);
+    console.error('Failed to start server:', error);
     process.exit(1);
   }
 };
 
 start();
+

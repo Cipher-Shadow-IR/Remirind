@@ -16,6 +16,14 @@ const seedDefaultExams = async () => {
       if (!exists) {
         await Exam.create(examData);
         console.log(`✓ Seeded exam: "${examData.title}"`);
+      } else if (exists.questions.length !== examData.questions.length) {
+        // Update exam with newly expanded questions pool
+        exists.questions = examData.questions;
+        exists.description = examData.description;
+        exists.durationMinutes = examData.durationMinutes;
+        exists.passingPercentage = examData.passingPercentage;
+        await exists.save();
+        console.log(`✓ Updated questions pool for: "${examData.title}" (${examData.questions.length} questions)`);
       }
     }
     console.log('Exam seeding complete.');

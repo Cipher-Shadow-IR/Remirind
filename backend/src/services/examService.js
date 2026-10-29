@@ -51,8 +51,21 @@ const getAvailableExams = async (filters = {}) => {
 };
 
 /**
+ * Shuffle array using Fisher-Yates algorithm
+ */
+const shuffleArray = (array) => {
+  const arr = [...array];
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+};
+
+/**
  * Get exam questions for taking a test
  * Crucial security: NEVER send correctOption or explanation to the client!
+ * Randomizes questions: if the pool has > 10 questions, selects a random set of 10 questions per session!
  */
 const getExamForTaking = async (examId) => {
   const exam = await Exam.findOne({ _id: examId, isActive: true });
@@ -61,14 +74,23 @@ const getExamForTaking = async (examId) => {
   }
 
   const doc = exam.toObject ? exam.toObject() : exam;
+  const allQuestions = doc.questions || [];
+
+  // If pool has more than 10 questions, pick a random sample of 10 questions
+  const questionsCount = 10;
+  const selectedPool = allQuestions.length > questionsCount
+    ? shuffleArray(allQuestions).slice(0, questionsCount)
+    : allQuestions;
 
   // Sanitize questions: strictly omit correctOption and explanation
-  const sanitizedQuestions = (doc.questions || []).map((q) => ({
+  const sanitizedQuestions = selectedPool.map((q) => ({
     _id: q._id,
     questionText: q.questionText,
     options: q.options,
     marks: q.marks || 10,
   }));
+
+  const totalMarks = sanitizedQuestions.reduce((sum, q) => sum + (q.marks || 10), 0);
 
   return {
     _id: doc._id,
@@ -76,15 +98,17 @@ const getExamForTaking = async (examId) => {
     description: doc.description,
     category: doc.category,
     durationMinutes: doc.durationMinutes,
-    totalMarks: doc.totalMarks || sanitizedQuestions.reduce((sum, q) => sum + q.marks, 0),
+    totalMarks,
     passingPercentage: doc.passingPercentage,
     totalQuestions: sanitizedQuestions.length,
+    poolSize: allQuestions.length,
     questions: sanitizedQuestions,
   };
 };
 
 /**
  * Submit exam, evaluate score, and persist exam result
+ * Accurately scores only the questions that were submitted in the user's session
  */
 const submitExam = async (examId, userId, answersInput = [], timeSpentSeconds = 0) => {
   const exam = await Exam.findById(examId);
@@ -106,13 +130,32 @@ const submitExam = async (examId, userId, answersInput = [], timeSpentSeconds = 
     });
   }
 
+  // Identify questions evaluated in this session
+  // If the exam has <= 10 questions (e.g. focused test or test suites), evaluate all of them
+  // If the exam has a larger pool (> 10 questions), evaluate the questions that were submitted in the user's session
+  let questionsToEvaluate = [];
+  if (exam.questions.length <= 10) {
+    questionsToEvaluate = exam.questions;
+  } else if (answersMap.size > 0) {
+    const sessionIds = new Set(Array.from(answersMap.keys()));
+    questionsToEvaluate = exam.questions.filter((q) => sessionIds.has(String(q._id)));
+    // If fewer than 10 were sent in answersMap, fill the remainder up to 10 from pool to account for unanswered questions
+    if (questionsToEvaluate.length < 10) {
+      const remaining = exam.questions.filter((q) => !sessionIds.has(String(q._id)));
+      questionsToEvaluate = questionsToEvaluate.concat(remaining.slice(0, 10 - questionsToEvaluate.length));
+    }
+  } else {
+    // If submitted completely blank, evaluate first 10 questions as unanswered
+    questionsToEvaluate = exam.questions.slice(0, 10);
+  }
+
   let totalScore = 0;
   let totalMaxMarks = 0;
   let correctCount = 0;
   let incorrectCount = 0;
   let unansweredCount = 0;
 
-  const details = exam.questions.map((q) => {
+  const details = questionsToEvaluate.map((q) => {
     const qIdStr = String(q._id);
     const selected = answersMap.has(qIdStr) ? answersMap.get(qIdStr) : null;
     const isAnswered = selected !== null && selected !== undefined && selected !== '';
@@ -162,7 +205,7 @@ const submitExam = async (examId, userId, answersInput = [], timeSpentSeconds = 
     totalMarks: totalMaxMarks,
     percentage,
     passed,
-    totalQuestions: exam.questions.length,
+    totalQuestions: questionsToEvaluate.length,
     correctCount,
     incorrectCount,
     unansweredCount,
